@@ -2,6 +2,7 @@ package http
 
 import (
 	"encoding/json"
+	"log"
 	"net/http"
 	"rest-api-app/books"
 
@@ -18,21 +19,27 @@ func NewHTTPHandlers(lib *books.Lib) *HTTPHandlers {
 	}
 }
 
-func (h *HTTPHandlers) HandlerGetBooksInfo(w http.ResponseWriter, r *http.Request) {
+func (h *HTTPHandlers) HandlerGetBookInfo(w http.ResponseWriter, r *http.Request) {
 	id := mux.Vars(r)["id"]
 
 	book, err := h.lib.GetBookInfo(id)
 	if err != nil {
 		http.Error(w, string(errToJSON(err)), http.StatusNotFound)
+		return
 	}
 
 	data, err := json.MarshalIndent(book, "", "		")
 	if err != nil {
+		log.Println(err)
 		http.Error(w, string(errToJSON(err)), http.StatusInternalServerError)
+		return
 	}
 
-	w.Write(data)
 	w.WriteHeader(http.StatusFound)
+	if _, err := w.Write(data); err != nil {
+		log.Println(err)
+		return
+	}
 }
 
 
@@ -42,7 +49,48 @@ func (h *HTTPHandlers) HandlerAddNewBook(w http.ResponseWriter, r *http.Request)
 	err := json.NewDecoder(r.Body).Decode(&inputBook)
 	if err != nil {
 		http.Error(w, string(errToJSON(err)), http.StatusBadRequest)
+		return
 	}
 
-	book := h.lib.AddBook(inputBook)
+	book, err := ValidateToCreate(inputBook)
+	if err != nil {
+		http.Error(w, string(errToJSON(err)), http.StatusBadRequest)
+		log.Println(err)
+		return
+	}
+
+	data, err := json.MarshalIndent(book, "", "		")
+	if err != nil {
+		log.Println(err)
+		return
+	}
+
+	w.WriteHeader(http.StatusCreated)
+	if _, err = w.Write([]byte(data)); err != nil {
+		log.Println(err)
+		return
+	}
+}
+
+
+func (h *HTTPHandlers) HandlerGetBooks(w http.ResponseWriter, r *http.Request) {
+	books := h.lib.GetAllBooks()
+
+	data, err := json.MarshalIndent(books, "", "	")
+	if err != nil {
+		log.Println(err)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	if _, err := w.Write([]byte(data)); err != nil {
+		log.Println(err)
+		return
+	}
+}
+
+func (h *HTTPHandlers) HandlerGetBooksByAuthor(w  http.ResponseWriter, r *http.Request) {
+	author := mux.Vars(r)["author"]
+
+	books := 
 }
