@@ -17,5 +17,6 @@ func (b *Book) Read() {
 	b.IsRead = true
 
 	readAtTime := time.Now()
-	*b.ReadAt = readAtTime
+	// *b.ReadAt = readAtTime буквально: *nil = readTime
+	b.ReadAt = &readAtTime
 }

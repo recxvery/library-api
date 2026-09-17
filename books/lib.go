@@ -22,8 +22,8 @@ func (l *Lib) AddBook(book Book) Book {
 	defer l.mtx.Unlock()
 	
 	id := uuid.New().String()
-	l.books[id] = &book
 	book.ID = id
+	l.books[id] = &book
 	
 	return *l.books[id]
 }
@@ -53,51 +53,28 @@ func (l *Lib) GetAllBooks() map[string]Book {
 	return tmp
 }
 
-func (l *Lib) GetBooksByAuthor(author string) map[string]Book {
-	tmp := make(map[string]Book)
-
+func(l *Lib) FilterBooks(author string, read *bool) map[string]Book {
 	l.mtx.RLock()
 	defer l.mtx.RUnlock()
 
+	tmp := make(map[string]Book)
+
 	for id, book := range l.books {
-		if book.Author == author {
-			tmp[id] = *book
+
+		if author != "" && book.Author != author {
+			continue
 		}
+
+		if read != nil &&  book.IsRead != *read { //если состояние задано и если не совпадает параметру пропускаем книгу
+			continue
+		}
+
+		tmp[id] = *book
 	}
 
 	return tmp
 }
-
-func (l *Lib) GetReadTrueBooks() map[string]Book {
-	tmp := make(map[string]Book)
-
-	l.mtx.RLock()
-	defer l.mtx.RUnlock()
-
-	for id, book := range l.books {
-		if book.IsRead == true {
-			tmp[id] = *book
-		}
-	}
-
-	return tmp
-}
-
-
-func (l *Lib) GetUnreadBooks() map[string]Book {
-	tmp := make(map[string]Book)
-
-	l.mtx.RLock()
-	defer l.mtx.RUnlock()
-
-	for id, book := range l.books {
-		if book.IsRead == false {
-			tmp[id] = *book
-		}
-	}
-
-	return tmp
-}
+ 
 func (l *Lib) RemoveBook(id string) (Book, error) {
 	l.mtx.Lock()
 	defer l.mtx.Unlock()
@@ -125,3 +102,49 @@ func (l *Lib) ReadSome(id string) (Book, error) {
 
 	return *book, nil
 }
+
+	// func (l *Lib) GetBooksByAuthor(author string) map[string]Book {
+	// 	tmp := make(map[string]Book)
+	
+	// 	l.mtx.RLock()
+	// 	defer l.mtx.RUnlock()
+	
+	// 	for id, book := range l.books {
+	// 		if book.Author == author {
+	// 			tmp[id] = *book
+	// 		}
+	// 	}
+	
+	// 	return tmp
+	// }
+	
+	// func (l *Lib) GetReadTrueBooks() map[string]Book {
+	// 	tmp := make(map[string]Book)
+	
+	// 	l.mtx.RLock()
+	// 	defer l.mtx.RUnlock()
+	
+	// 	for id, book := range l.books {
+	// 		if book.IsRead == true {
+	// 			tmp[id] = *book
+	// 		}
+	// 	}
+	
+	// 	return tmp
+	// }
+	
+	
+	// func (l *Lib) GetUnreadBooks() map[string]Book {
+	// 	tmp := make(map[string]Book)
+	
+	// 	l.mtx.RLock()
+	// 	defer l.mtx.RUnlock()
+	
+	// 	for id, book := range l.books {
+	// 		if book.IsRead == false {
+	// 			tmp[id] = *book
+	// 		}
+	// 	}
+	
+	// 	return tmp
+	// }

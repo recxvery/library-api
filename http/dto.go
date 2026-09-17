@@ -7,28 +7,28 @@ import (
 )
 
 type BookDTO struct {
-	Author string
-	Title string
-	Pages int
-	Year int
+	Author string `json:"author"`
+	Title  string `json:"title"`
+	Pages  int    `json:"pages"`
+	Year   int    `json:"year"`
 }
 
 type errDTO struct {
 	Message string
-	Time time.Time
+	Time    time.Time
 }
 
 func errToJSON(err error) []byte {
 	jsonErr, _ := json.MarshalIndent(errDTO{
 		Message: err.Error(),
-		Time: time.Now(),
+		Time:    time.Now(),
 	}, "", "	")
 
 	return jsonErr
 }
 
 func ValidateToCreate(book BookDTO) (books.Book, error) {
-	if book.Title != "" && book.Author != "" && book.Pages <= 0 && book.Year <= 0 {
+	if book.Title != "" && book.Author != "" && book.Pages > 0 && book.Year > 0 {
 		return books.Book{
 			Title:      book.Title,
 			Author:     book.Author,
@@ -40,4 +40,3 @@ func ValidateToCreate(book BookDTO) (books.Book, error) {
 
 	return books.Book{}, books.ErrorNotEnoughData
 }
-
