@@ -3,6 +3,7 @@ package http
 import (
 	"encoding/json"
 	"rest-api-app/books"
+	"rest-api-app/db"
 	"time"
 )
 
@@ -27,9 +28,9 @@ func errToJSON(err error) []byte {
 	return jsonErr
 }
 
-func ValidateToCreate(book BookDTO) (books.Book, error) {
+func ValidateToCreate(book BookDTO) (db.BookModel, error) {
 	if book.Title != "" && book.Author != "" && book.Pages > 0 && book.Year > 0 {
-		return books.Book{
+		return db.BookModel{
 			Title:      book.Title,
 			Author:     book.Author,
 			PagesCount: book.Pages,
@@ -38,5 +39,5 @@ func ValidateToCreate(book BookDTO) (books.Book, error) {
 		}, nil
 	}
 
-	return books.Book{}, books.ErrorNotEnoughData
+	return db.BookModel{}, books.ErrorNotEnoughData
 }

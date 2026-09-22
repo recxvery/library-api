@@ -1,14 +1,24 @@
 package main
 
 import (
+	"context"
 	"log"
-	"rest-api-app/books"
+	"rest-api-app/db"
 	"rest-api-app/http"
 )
 
 func main() {
-	newLib := books.NewLib()
-	handlers := http.NewHTTPHandlers(newLib)
+	ctx := context.Background()
+
+	conn, err := db.ConnectDB(ctx)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer conn.Close(ctx)
+
+	repo := db.NewBookRepo(conn)
+	handlers := http.NewHTTPHandlers(repo)
 	server := http.NewServer(handlers)
 
 	log.Println("Server started")

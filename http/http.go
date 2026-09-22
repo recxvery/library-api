@@ -5,31 +5,33 @@ import (
 	"errors"
 	"log"
 	"net/http"
-	"rest-api-app/books"
+	"rest-api-app/db"
 	"strconv"
 
 	"github.com/gorilla/mux"
 )
 
 type HTTPHandlers struct {
-	lib *books.Lib
+	repo *db.BookRepository
 }
 
-func NewHTTPHandlers(lib *books.Lib) *HTTPHandlers {
+func NewHTTPHandlers(db *db.BookRepository) *HTTPHandlers {
 	return &HTTPHandlers{
-		lib: lib,
+		repo: db,
 	}
 }
 
 func (h *HTTPHandlers) HandlerGetBookInfo(w http.ResponseWriter, r *http.Request) {
-	id := mux.Vars(r)["id"]
+	idFromQuery := mux.Vars(r)["id"]
 
-	if len(id) == 0 {
+	id, err := strconv.Atoi(idFromQuery)
+
+	if err != nil {
 		http.Error(w, string(errToJSON(errors.New("Len 0 is imposibble for id"))), http.StatusBadRequest)
 		return
 	}
 
-	book, err := h.lib.GetBookInfo(id)
+	book, err := h.repo.GetBook(r.Context(), id)
 	if err != nil {
 		http.Error(w, string(errToJSON(err)), http.StatusNotFound)
 		return
@@ -65,7 +67,12 @@ func (h *HTTPHandlers) HandlerAddNewBook(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
-	savedBook := h.lib.AddBook(book)
+	savedBook, err := h.repo.InsertBook(r.Context(), book)
+	if err != nil {
+		http.Error(w, string(errToJSON(err)), http.StatusBadRequest)
+		log.Println(err)
+		return
+	}
 
 	data, err := json.MarshalIndent(savedBook, "", "		")
 	if err != nil {
@@ -99,7 +106,12 @@ func (h *HTTPHandlers) HandlerGetBooks(w http.ResponseWriter, r *http.Request) {
 		read = &value //передаем значение
 	}
 
-	books := h.lib.FilterBooks(author, read)
+	books, err := h.repo.GetBooks(r.Context(), author, read)
+	if err != nil {
+		http.Error(w, string(errToJSON(errors.New("must be true or false"))), http.StatusBadRequest)
+		log.Println(err)
+		return
+	}
 
 	data, err := json.MarshalIndent(books, "", "	")
 	if err != nil {
@@ -174,14 +186,16 @@ func (h *HTTPHandlers) HandlerGetBooks(w http.ResponseWriter, r *http.Request) {
 // }
 
 func (h *HTTPHandlers) HandlerRemoveBook(w http.ResponseWriter, r *http.Request) {
-	id := mux.Vars(r)["id"]
+	idFromQuery := mux.Vars(r)["id"]
 
-	if len(id) == 0 {
+	id, err := strconv.Atoi(idFromQuery)
+
+	if err != nil {
 		http.Error(w, string(errToJSON(errors.New("Len 0 is imposibble for id"))), http.StatusBadRequest)
 		return
 	}
 
-	book, err := h.lib.RemoveBook(id)
+	book, err := h.repo.DeleteBook(r.Context(), id)
 	if err != nil {
 		http.Error(w, string(errToJSON(err)), http.StatusNotFound)
 		return
@@ -201,14 +215,16 @@ func (h *HTTPHandlers) HandlerRemoveBook(w http.ResponseWriter, r *http.Request)
 }
 
 func (h *HTTPHandlers) HandlerMakeBookRead(w http.ResponseWriter, r *http.Request) {
-	id := mux.Vars(r)["id"]
+	idFromQuery := mux.Vars(r)["id"]
 
-	if len(id) == 0 {
+	id, err := strconv.Atoi(idFromQuery)
+
+	if err != nil {
 		http.Error(w, string(errToJSON(errors.New("Len 0 is imposibble for id"))), http.StatusBadRequest)
 		return
 	}
 
-	book, err := h.lib.ReadSome(id)
+	book, err := h.repo.UpdateBook(r.Context(), id)
 	if err != nil {
 		http.Error(w, string(errToJSON(err)), http.StatusNotFound)
 		log.Println(err)
