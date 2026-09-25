@@ -14,10 +14,14 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	defer conn.Close(ctx)
+	defer conn.Close(ctx) 
 
 	repo := db.NewBookRepo(conn)
+
+	if err := repo.CreateDB(ctx); err != nil {
+		log.Fatal(err)
+	}
+
 	handlers := http.NewHTTPHandlers(repo)
 	server := http.NewServer(handlers)
 
@@ -26,3 +30,5 @@ func main() {
 		log.Println(err.Error())
 	}
 }
+
+

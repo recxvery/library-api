@@ -5,10 +5,12 @@ import (
 	"errors"
 	"log"
 	"net/http"
+	"rest-api-app/books"
 	"rest-api-app/db"
 	"strconv"
 
 	"github.com/gorilla/mux"
+	"github.com/jackc/pgx/v5"
 )
 
 type HTTPHandlers struct {
@@ -27,23 +29,23 @@ func (h *HTTPHandlers) HandlerGetBookInfo(w http.ResponseWriter, r *http.Request
 	id, err := strconv.Atoi(idFromQuery)
 
 	if err != nil {
-		http.Error(w, string(errToJSON(errors.New("Len 0 is imposibble for id"))), http.StatusBadRequest)
+		errorHandle(w, err)
 		return
 	}
 
 	book, err := h.repo.GetBook(r.Context(), id)
 	if err != nil {
-		http.Error(w, string(errToJSON(err)), http.StatusNotFound)
+		errorHandle(w, err)
 		return
 	}
 
 	data, err := json.MarshalIndent(book, "", "		")
 	if err != nil {
-		log.Println(err)
-		http.Error(w, string(errToJSON(err)), http.StatusInternalServerError)
+		errorHandle(w, err)
 		return
 	}
 
+	w.Header().Set("Content-type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	if _, err := w.Write(data); err != nil {
 		log.Println(err)
@@ -62,25 +64,23 @@ func (h *HTTPHandlers) HandlerAddNewBook(w http.ResponseWriter, r *http.Request)
 
 	book, err := ValidateToCreate(inputBook)
 	if err != nil {
-		http.Error(w, string(errToJSON(err)), http.StatusBadRequest)
-		log.Println(err)
+		errorHandle(w, err)
 		return
 	}
 
 	savedBook, err := h.repo.InsertBook(r.Context(), book)
 	if err != nil {
-		http.Error(w, string(errToJSON(err)), http.StatusBadRequest)
-		log.Println(err)
+		errorHandle(w, err)
 		return
 	}
 
 	data, err := json.MarshalIndent(savedBook, "", "		")
 	if err != nil {
-		http.Error(w, string(errToJSON(err)), http.StatusInternalServerError)
-		log.Println(err)
+		errorHandle(w, err)
 		return
 	}
 
+	w.Header().Set("Content-type", "application/json")
 	w.WriteHeader(http.StatusCreated)
 	if _, err = w.Write([]byte(data)); err != nil {
 		log.Println(err)
@@ -98,8 +98,7 @@ func (h *HTTPHandlers) HandlerGetBooks(w http.ResponseWriter, r *http.Request) {
 	if readStr := query.Get("read"); readStr != "" {
 		value, err := strconv.ParseBool(readStr)
 		if err != nil {
-			http.Error(w, string(errToJSON(errors.New("must be true or false"))), http.StatusBadRequest)
-			log.Println(err)
+			errorHandle(w, err)
 			return
 		}
 
@@ -108,18 +107,17 @@ func (h *HTTPHandlers) HandlerGetBooks(w http.ResponseWriter, r *http.Request) {
 
 	books, err := h.repo.GetBooks(r.Context(), author, read)
 	if err != nil {
-		http.Error(w, string(errToJSON(errors.New("must be true or false"))), http.StatusBadRequest)
-		log.Println(err)
+		errorHandle(w, err)
 		return
 	}
 
 	data, err := json.MarshalIndent(books, "", "	")
 	if err != nil {
-		http.Error(w, string(errToJSON(err)), http.StatusInternalServerError)
-		log.Println(err)
+		errorHandle(w, err)
 		return
 	}
 
+	w.Header().Set("Content-type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	if _, err := w.Write([]byte(data)); err != nil {
 		log.Println(err)
@@ -191,22 +189,23 @@ func (h *HTTPHandlers) HandlerRemoveBook(w http.ResponseWriter, r *http.Request)
 	id, err := strconv.Atoi(idFromQuery)
 
 	if err != nil {
-		http.Error(w, string(errToJSON(errors.New("Len 0 is imposibble for id"))), http.StatusBadRequest)
+		errorHandle(w, err)
 		return
 	}
 
 	book, err := h.repo.DeleteBook(r.Context(), id)
 	if err != nil {
-		http.Error(w, string(errToJSON(err)), http.StatusNotFound)
+		errorHandle(w, err)
 		return
 	}
 
 	data, err := json.MarshalIndent(book, "", "		")
 	if err != nil {
-		log.Println(err)
+		errorHandle(w, err)
 		return
 	}
 
+	w.Header().Set("Content-type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	if _, err := w.Write([]byte(data)); err != nil {
 		log.Println(err)
@@ -220,26 +219,42 @@ func (h *HTTPHandlers) HandlerMakeBookRead(w http.ResponseWriter, r *http.Reques
 	id, err := strconv.Atoi(idFromQuery)
 
 	if err != nil {
-		http.Error(w, string(errToJSON(errors.New("Len 0 is imposibble for id"))), http.StatusBadRequest)
+		errorHandle(w, err)
 		return
 	}
 
 	book, err := h.repo.UpdateBook(r.Context(), id)
 	if err != nil {
-		http.Error(w, string(errToJSON(err)), http.StatusNotFound)
-		log.Println(err)
+		errorHandle(w, err)
 		return
 	}
 
 	data, err := json.MarshalIndent(book, "", "		")
 	if err != nil {
-		log.Println(err)
+		errorHandle(w, err)
 		return
 	}
+
+	w.Header().Set("Content-type", "application/json")
 	w.WriteHeader(http.StatusOK)
 
 	if _, err = w.Write(data); err != nil {
 		log.Println(err)
 		return
+	}
+}
+
+func errorHandle(w http.ResponseWriter, err error) {
+	log.Println(err)
+
+	switch {
+	case errors.Is(err, pgx.ErrNoRows):
+		http.Error(w, string(errToJSON(err)), http.StatusNotFound)
+	case errors.Is(err, strconv.ErrSyntax) || errors.Is(err, strconv.ErrRange):
+		http.Error(w, string(errToJSON(err)), http.StatusBadRequest)
+	case errors.Is(err, books.ErrorNotEnoughData):
+		http.Error(w, string(errToJSON(err)), http.StatusBadRequest)
+	default:
+		http.Error(w, string(errToJSON(err)), http.StatusInternalServerError)
 	}
 }

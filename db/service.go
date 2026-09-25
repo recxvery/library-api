@@ -173,6 +173,7 @@ func (r *BookRepository) GetBook(ctx context.Context, id int) (BookModel, error)
 // 	return books, nil
 // }
 
+
 func (r *BookRepository) GetBooks(ctx context.Context, author string, read *bool) ([]BookModel, error) {
 	sqlQuery := `
 	SELECT * FROM books 

@@ -22,7 +22,7 @@ type BookModel struct {
 
 func ConnectDB(ctx context.Context) (*pgx.Conn, error) {
 	conn_string := os.Getenv("CONN_STRING")
-	log.Println(conn_string)
+	// log.Println(conn_string)
 
 	return pgx.Connect(ctx, conn_string)
 }
@@ -36,9 +36,9 @@ func CheckConnection(ctx context.Context, conn *pgx.Conn) {
 	}
 }
 
-func CreateDB(ctx context.Context, conn *pgx.Conn) error {
+func (r *BookRepository) CreateDB(ctx context.Context) error {
 	sqlQuery := `
-	CREATE TABLE books IF NOT EXISTS (
+	CREATE TABLE IF NOT EXISTS books (
 		id SERIAL PRIMARY KEY,
 		book_title VARCHAR(1000) NOT NULL,
 		book_author VARCHAR(200) NOT NULL,
@@ -49,7 +49,7 @@ func CreateDB(ctx context.Context, conn *pgx.Conn) error {
 		read_at			TIMESTAMP
 	)`
 
-	if _, err := conn.Exec(ctx, sqlQuery); err != nil {
+	if _, err := r.conn.Exec(ctx, sqlQuery); err != nil {
 		log.Println(err)
 		return err
 	}

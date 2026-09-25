@@ -28,17 +28,17 @@ func (l *Lib) AddBook(book Book) Book {
 	return *l.books[id]
 }
 
-func (l *Lib) GetBookInfo(id string) (Book, error) {
-	l.mtx.RLock()
-	defer l.mtx.RUnlock()
+// func (l *Lib) GetBookInfo(id string) (Book, error) {
+// 	l.mtx.RLock()
+// 	defer l.mtx.RUnlock()
 	
-	book, ok := l.books[id]
-	if !ok {
-		return Book{}, ErrorThereIsNoBook
-	}
+// 	book, ok := l.books[id]
+// 	if !ok {
+// 		return Book{}, ErrorThereIsNoBook
+// 	}
 	
-	return *book, nil
-}
+// 	return *book, nil
+// }
 
 func (l *Lib) GetAllBooks() map[string]Book {
 	tmp := make(map[string]Book)
@@ -89,19 +89,19 @@ func (l *Lib) RemoveBook(id string) (Book, error) {
 	return *book, nil
 }
 
-func (l *Lib) ReadSome(id string) (Book, error) {
-	l.mtx.Lock()
-	defer l.mtx.Unlock()
+// func (l *Lib) ReadSome(id string) (Book, error) {
+// 	l.mtx.Lock()
+// 	defer l.mtx.Unlock()
 
-	book, ok := l.books[id]
-	if !ok {
-		return Book{}, ErrorThereIsNoBook
-	}
+// 	book, ok := l.books[id]
+// 	if !ok {
+// 		return Book{}, ErrorThereIsNoBook
+// 	}
 
-	book.Read()
+// 	book.Read()
 
-	return *book, nil
-}
+// 	return *book, nil
+// }
 
 	// func (l *Lib) GetBooksByAuthor(author string) map[string]Book {
 	// 	tmp := make(map[string]Book)
