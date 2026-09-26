@@ -1,4 +1,4 @@
-package books
+package http
 
 import "errors"
 

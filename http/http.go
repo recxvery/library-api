@@ -5,7 +5,6 @@ import (
 	"errors"
 	"log"
 	"net/http"
-	"rest-api-app/books"
 	"rest-api-app/db"
 	"strconv"
 
@@ -125,63 +124,6 @@ func (h *HTTPHandlers) HandlerGetBooks(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// func (h *HTTPHandlers) HandlerGetBooksByAuthor(w http.ResponseWriter, r *http.Request) {
-// 	author := r.URL.Query().Get("author")
-
-// 	if len(author) <= 1 {
-// 		err := errors.New("Author being empty is not possible")
-// 		http.Error(w, string(errToJSON(err)), http.StatusBadRequest)
-// 		return
-// 	}
-
-// 	books := h.lib.GetBooksByAuthor(author)
-
-// 	data, err := json.MarshalIndent(books, "", "	")
-// 	if err != nil {
-// 		http.Error(w, string(errToJSON(err)), http.StatusInternalServerError)
-// 		log.Println(err)
-// 		return
-// 	}
-
-// 	w.WriteHeader(http.StatusOK)
-// 	if _, err := w.Write([]byte(data)); err != nil {
-// 		log.Println(err)
-// 		return
-// 	}
-// }
-
-// func (h *HTTPHandlers) HandlerGetReadBooks(w http.ResponseWriter, r *http.Request) {
-// 	var (
-// 		isRead       bool
-// 		booksByParam map[string]books.Book
-// 		err          error
-// 	)
-// 	isReadNotBool := strings.ToLower(r.URL.Query().Get("read"))
-
-// 	isRead, err = strconv.ParseBool(isReadNotBool)
-// 	if err != nil {
-// 		http.Error(w, string(errToJSON(err)), http.StatusBadRequest)
-// 		return
-// 	}
-
-// 	if isRead {
-// 		booksByParam = h.lib.GetReadTrueBooks()
-// 	} else {
-// 		booksByParam = h.lib.GetUnreadBooks()
-// 	}
-
-// 	data, err := json.MarshalIndent(booksByParam, "", "		")
-// 	if err != nil {
-// 		log.Println(err)
-// 		return
-// 	}
-
-// 	w.WriteHeader(http.StatusOK)
-// 	if _, err = w.Write([]byte(data)); err != nil {
-// 		log.Println(err)
-// 		return
-// 	}
-// }
 
 func (h *HTTPHandlers) HandlerRemoveBook(w http.ResponseWriter, r *http.Request) {
 	idFromQuery := mux.Vars(r)["id"]
@@ -252,7 +194,7 @@ func errorHandle(w http.ResponseWriter, err error) {
 		http.Error(w, string(errToJSON(err)), http.StatusNotFound)
 	case errors.Is(err, strconv.ErrSyntax) || errors.Is(err, strconv.ErrRange):
 		http.Error(w, string(errToJSON(err)), http.StatusBadRequest)
-	case errors.Is(err, books.ErrorNotEnoughData):
+	case errors.Is(err, ErrorNotEnoughData):
 		http.Error(w, string(errToJSON(err)), http.StatusBadRequest)
 	default:
 		http.Error(w, string(errToJSON(err)), http.StatusInternalServerError)

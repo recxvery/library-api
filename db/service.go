@@ -224,6 +224,6 @@ func (r *BookRepository) GetBooks(ctx context.Context, author string, read *bool
 
 		books = append(books, Book)
 	}
-	pp.Print(books)
+	pp.Print(books) //for logs
 	return books, nil
 }
