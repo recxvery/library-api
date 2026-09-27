@@ -8,3 +8,5 @@ service-up:
 service-down:
 	@docker compose down
 
+service-rebuild-launch:
+	@docker compose up -d --build

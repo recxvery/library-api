@@ -3,8 +3,12 @@ package main
 import (
 	"context"
 	"log"
+	"os"
 	"rest-api-app/db"
 	"rest-api-app/http"
+	"github.com/golang-migrate/migrate/v4"
+	_ "github.com/golang-migrate/migrate/v4/database/postgres"
+	_ "github.com/golang-migrate/migrate/v4/source/file"
 )
 
 func main() {
@@ -14,11 +18,20 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer pool.Close() 
+	defer pool.Close()
 
 	repo := db.NewBookRepo(pool)
 
-	if err := repo.CreateDB(ctx); err != nil {
+	m, err := migrate.New(
+		"file://migrations",
+		os.Getenv("CONN_STRING")+"?sslmode=disable",
+	)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if err = m.Up(); err != nil && err != migrate.ErrNoChange {
 		log.Fatal(err)
 	}
 
@@ -30,5 +43,3 @@ func main() {
 		log.Println(err.Error())
 	}
 }
-
-

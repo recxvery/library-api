@@ -12,4 +12,5 @@ FROM alpine
 WORKDIR /app
 
 COPY --from=builder /app/exe .
+COPY --from=builder /app/migrations ./migrations
 ENTRYPOINT [ "./exe" ]
