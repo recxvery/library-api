@@ -5,6 +5,6 @@ service-db-up:
 service-up:
 	@docker compose up
 
-service-dowm:
+service-down:
 	@docker compose down
 
