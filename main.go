@@ -10,13 +10,13 @@ import (
 func main() {
 	ctx := context.Background()
 
-	conn, err := db.ConnectDB(ctx)
+	pool, err := db.ConnectDB(ctx)
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer conn.Close(ctx) 
+	defer pool.Close() 
 
-	repo := db.NewBookRepo(conn)
+	repo := db.NewBookRepo(pool)
 
 	if err := repo.CreateDB(ctx); err != nil {
 		log.Fatal(err)

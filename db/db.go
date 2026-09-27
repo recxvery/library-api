@@ -6,8 +6,18 @@ import (
 	"os"
 	"time"
 
-	"github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/pgxpool"
 )
+
+type BookRepository struct {
+	Pool *pgxpool.Pool
+}
+
+func NewBookRepo(pool_connection *pgxpool.Pool) *BookRepository {
+	return &BookRepository{
+		Pool: pool_connection,
+	}
+}
 
 type BookModel struct {
 	ID         int
@@ -20,20 +30,18 @@ type BookModel struct {
 	ReadAt     *time.Time
 }
 
-func ConnectDB(ctx context.Context) (*pgx.Conn, error) {
-	conn_string := os.Getenv("CONN_STRING")
+func ConnectDB(ctx context.Context) (*pgxpool.Pool, error) {
 	// log.Println(conn_string)
-
-	return pgx.Connect(ctx, conn_string)
+	return pgxpool.New(ctx, os.Getenv("CONN_STRING"))
 }
 
-func CheckConnection(ctx context.Context, conn *pgx.Conn) {
-	if err := conn.Ping(ctx); err != nil {
+func CheckConnection(ctx context.Context, pool *pgxpool.Pool) {
+	if err := pool.Ping(ctx); err != nil {
 		log.Println(err)
 		panic(err)
 	} else {
 		log.Println("succesfully connected")
-	}
+	} //for /readyz
 }
 
 func (r *BookRepository) CreateDB(ctx context.Context) error {
@@ -49,7 +57,7 @@ func (r *BookRepository) CreateDB(ctx context.Context) error {
 		read_at			TIMESTAMP
 	)`
 
-	if _, err := r.conn.Exec(ctx, sqlQuery); err != nil {
+	if _, err := r.Pool.Exec(ctx, sqlQuery); err != nil {
 		log.Println(err)
 		return err
 	}
