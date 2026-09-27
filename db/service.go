@@ -19,7 +19,7 @@ func (r *BookRepository) InsertBook(ctx context.Context, Book BookModel) (BookMo
 
 	var result BookModel
 
-	err := r.Pool.QueryRow(ctx,
+	err := r.pool.QueryRow(ctx,
 		sqlQuery,
 		Book.Title,
 		Book.Author,
@@ -53,7 +53,7 @@ func (r *BookRepository) UpdateBook(ctx context.Context, id int) (BookModel, err
 	`
 	var result BookModel
 
-	err := r.Pool.QueryRow(ctx, sqlQuery, true, time.Now(), id).Scan(
+	err := r.pool.QueryRow(ctx, sqlQuery, true, time.Now(), id).Scan(
 		&result.ID,
 		&result.Title,
 		&result.Author,
@@ -78,7 +78,7 @@ func (r *BookRepository) DeleteBook(ctx context.Context, id int) (BookModel, err
 	`
 	var result BookModel
 
-	err := r.Pool.QueryRow(ctx, sqlQuery, id).Scan(
+	err := r.pool.QueryRow(ctx, sqlQuery, id).Scan(
 		&result.ID,
 		&result.Title,
 		&result.Author,
@@ -104,7 +104,7 @@ func (r *BookRepository) GetBook(ctx context.Context, id int) (BookModel, error)
 
 	var result BookModel
 
-	err := r.Pool.QueryRow(ctx, sqlQuery, id).Scan(
+	err := r.pool.QueryRow(ctx, sqlQuery, id).Scan(
 		&result.ID,
 		&result.Title,
 		&result.Author,
@@ -145,7 +145,7 @@ func (r *BookRepository) GetBooks(ctx context.Context, author string, read *bool
 	}
 	sqlQuery += ` ORDER BY id ASC;`
 
-	rows, err := r.Pool.Query(ctx, sqlQuery, args...)
+	rows, err := r.pool.Query(ctx, sqlQuery, args...)
 	if err != nil {
 		return []BookModel{}, err
 	}
@@ -175,9 +175,9 @@ func (r *BookRepository) GetBooks(ctx context.Context, author string, read *bool
 		books = append(books, Book)
 	}
 
-	if rows.Err() != nil {
-		log.Println(err)
-		return []BookModel{}, err
+	if err := rows.Err(); err != nil {
+		log.Println(rows.Err())
+		return []BookModel{}, rows.Err()
 	}
 
 	pp.Print(books) //for logs

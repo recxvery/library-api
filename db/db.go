@@ -10,12 +10,12 @@ import (
 )
 
 type BookRepository struct {
-	Pool *pgxpool.Pool
+	pool *pgxpool.Pool
 }
 
 func NewBookRepo(pool_connection *pgxpool.Pool) *BookRepository {
 	return &BookRepository{
-		Pool: pool_connection,
+		pool: pool_connection,
 	}
 }
 
@@ -57,7 +57,7 @@ func (r *BookRepository) CreateDB(ctx context.Context) error {
 		read_at			TIMESTAMP
 	)`
 
-	if _, err := r.Pool.Exec(ctx, sqlQuery); err != nil {
+	if _, err := r.pool.Exec(ctx, sqlQuery); err != nil {
 		log.Println(err)
 		return err
 	}
