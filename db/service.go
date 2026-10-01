@@ -12,9 +12,9 @@ import (
 
 func (r *BookRepository) InsertBook(ctx context.Context, Book BookModel) (BookModel, error) {
 	sqlQuery := `
-	INSERT INTO books (book_title, book_author, publish_year, pages_count, book_read, added_at)
-	VALUES ($1, $2, $3, $4, $5, $6) 
-	RETURNING id, book_title, book_author, publish_year, pages_count, book_read, added_at, read_at;
+	INSERT INTO books (book_title, book_author, publish_year, pages_count, book_read, added_at,  book_description)
+	VALUES ($1, $2, $3, $4, $5, $6, &7) 
+	RETURNING id, book_title, book_author, publish_year, pages_count, book_read, added_at, read_at, book_description;
 	`
 
 	var result BookModel
@@ -26,7 +26,8 @@ func (r *BookRepository) InsertBook(ctx context.Context, Book BookModel) (BookMo
 		Book.Year,
 		Book.PagesCount,
 		Book.IsRead,
-		Book.AddedAt).Scan(
+		Book.AddedAt,
+		Book.Description).Scan(
 		&result.ID,
 		&result.Title,
 		&result.Author,
@@ -35,6 +36,7 @@ func (r *BookRepository) InsertBook(ctx context.Context, Book BookModel) (BookMo
 		&result.IsRead,
 		&result.AddedAt,
 		&result.ReadAt,
+		&result.Description,
 	)
 
 	if err != nil {
@@ -49,7 +51,7 @@ func (r *BookRepository) UpdateBook(ctx context.Context, id int) (BookModel, err
 	UPDATE books 
 	SET book_read=$1, read_at=$2
 	WHERE id=$3
-	RETURNING id, book_title, book_author, publish_year, pages_count, book_read, added_at, read_at;
+	RETURNING id, book_title, book_author, publish_year, pages_count, book_read, added_at, read_at, book_description;
 	`
 	var result BookModel
 
@@ -62,6 +64,7 @@ func (r *BookRepository) UpdateBook(ctx context.Context, id int) (BookModel, err
 		&result.IsRead,
 		&result.AddedAt,
 		&result.ReadAt,
+		&result.Description,
 	)
 
 	if err != nil {
@@ -74,7 +77,7 @@ func (r *BookRepository) UpdateBook(ctx context.Context, id int) (BookModel, err
 func (r *BookRepository) DeleteBook(ctx context.Context, id int) (BookModel, error) {
 	sqlQuery := `
 		DELETE FROM books WHERE id=$1
-		RETURNING id, book_title, book_author, publish_year, pages_count, book_read, added_at, read_at;
+		RETURNING id, book_title, book_author, publish_year, pages_count, book_read, added_at, read_at, book_description;
 	`
 	var result BookModel
 
@@ -87,6 +90,7 @@ func (r *BookRepository) DeleteBook(ctx context.Context, id int) (BookModel, err
 		&result.IsRead,
 		&result.AddedAt,
 		&result.ReadAt,
+		&result.Description,
 	)
 
 	if err != nil {
@@ -113,6 +117,7 @@ func (r *BookRepository) GetBook(ctx context.Context, id int) (BookModel, error)
 		&result.IsRead,
 		&result.AddedAt,
 		&result.ReadAt,
+		&result.Description,
 	)
 
 	if err != nil {
@@ -166,6 +171,7 @@ func (r *BookRepository) GetBooks(ctx context.Context, author string, read *bool
 			&Book.IsRead,
 			&Book.AddedAt,
 			&Book.ReadAt,
+			&Book.Description,
 		)
 
 		if err != nil {

@@ -23,6 +23,7 @@ type BookModel struct {
 	ID         int
 	Title      string
 	Author     string
+	Description *string
 	Year       int
 	PagesCount int
 	IsRead     bool
@@ -31,7 +32,6 @@ type BookModel struct {
 }
 
 func ConnectDB(ctx context.Context) (*pgxpool.Pool, error) {
-	// log.Println(conn_string)
 	return pgxpool.New(ctx, os.Getenv("CONN_STRING"))
 }
 
@@ -44,7 +44,7 @@ func CheckConnection(ctx context.Context, pool *pgxpool.Pool) {
 	} //for /readyz
 }
 
-func (r *BookRepository) CreateDB(ctx context.Context) error {
+/* func (r *BookRepository) CreateDB(ctx context.Context) error {
 	sqlQuery := `
 	CREATE TABLE IF NOT EXISTS books (
 		id SERIAL PRIMARY KEY,
@@ -63,4 +63,6 @@ func (r *BookRepository) CreateDB(ctx context.Context) error {
 	}
 
 	return nil
-}
+} 
+migrations used 
+*/

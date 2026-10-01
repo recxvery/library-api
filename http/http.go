@@ -66,7 +66,6 @@ func (h *HTTPHandlers) HandlerAddNewBook(w http.ResponseWriter, r *http.Request)
 		errorHandle(w, err)
 		return
 	}
-
 	savedBook, err := h.repo.InsertBook(r.Context(), book)
 	if err != nil {
 		errorHandle(w, err)
@@ -123,7 +122,6 @@ func (h *HTTPHandlers) HandlerGetBooks(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 }
-
 
 func (h *HTTPHandlers) HandlerRemoveBook(w http.ResponseWriter, r *http.Request) {
 	idFromQuery := mux.Vars(r)["id"]

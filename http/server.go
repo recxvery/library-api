@@ -19,6 +19,8 @@ func NewServer(handlers *HTTPHandlers) *HTTPServer {
 
 func (h *HTTPServer) StartServer() error {
 	router := mux.NewRouter()
+		router.Use(RecoverMiddleware)
+		router.Use(Middleware)
 
 	router.Path("/books").Methods("POST").HandlerFunc(h.httpHandlers.HandlerAddNewBook)
 	router.Path("/books").Methods("GET").HandlerFunc(h.httpHandlers.HandlerGetBooks)

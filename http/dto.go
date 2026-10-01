@@ -9,6 +9,7 @@ import (
 type BookDTO struct {
 	Author string `json:"author"`
 	Title  string `json:"title"`
+	Description string `json:"description"`
 	Pages  int    `json:"pages"`
 	Year   int    `json:"year"`
 }
@@ -32,6 +33,7 @@ func ValidateToCreate(book BookDTO) (db.BookModel, error) {
 		return db.BookModel{
 			Title:      book.Title,
 			Author:     book.Author,
+			Description: &book.Description,
 			PagesCount: book.Pages,
 			Year:       book.Year,
 			AddedAt:    time.Now(),

@@ -1,0 +1,1 @@
+ALTER TABLE books ADD book_description VARCHAR(1000);
