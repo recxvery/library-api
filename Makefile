@@ -9,4 +9,4 @@ service-down:
 	@docker compose down
 
 service-up-rebuild:
-	@docker compose up -d --build
+	@docker compose up --build

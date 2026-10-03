@@ -6,6 +6,7 @@ import (
 	"os"
 	"rest-api-app/db"
 	"rest-api-app/http"
+
 	"github.com/golang-migrate/migrate/v4"
 	_ "github.com/golang-migrate/migrate/v4/database/postgres"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
@@ -38,8 +39,10 @@ func main() {
 	handlers := http.NewHTTPHandlers(repo)
 	server := http.NewServer(handlers)
 
-	log.Println("Server started")
+	// log.Println("Server started")
 	if err := server.StartServer(); err != nil {
 		log.Println(err.Error())
+	} else {
+		log.Println("Gracefully shutodwn")
 	}
 }

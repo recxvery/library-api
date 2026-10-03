@@ -73,17 +73,31 @@ func RecoverMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		defer func() {
 			if err := recover(); err != nil {
-				w.Header().Set("Connection", "close") 
+				w.Header().Set("Connection", "close")
 				http.Error(
 					w,
 					"Internal Server Error",
 					500,
 				)
 				log.Println(err)
-				debug.PrintStack() 
+				debug.PrintStack()
 			}
 		}()
 
+		next.ServeHTTP(w, r)
+	})
+}
+
+func (app *AppServer) ShutdownMiddleWare(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if app.shuttingDown.Load() {
+			http.Error(w,
+				"The server is undergoing a graceful shutdown. Active requests are being processed, but no new requests are accepted. Please try again later.",
+				http.StatusServiceUnavailable,
+			)
+
+			return
+		}
 		next.ServeHTTP(w, r)
 	})
 }
