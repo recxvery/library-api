@@ -3,17 +3,16 @@ package db
 import (
 	"context"
 	"fmt"
-	"log"
 	"strings"
 	"time"
 
 	"github.com/k0kubun/pp"
 )
 
-func (r *BookRepository) InsertBook(ctx context.Context, Book BookModel) (BookModel, error) {
+func (r *DbRepository) InsertBook(ctx context.Context, Book BookModel) (BookModel, error) {
 	sqlQuery := `
 	INSERT INTO books (book_title, book_author, publish_year, pages_count, book_read, added_at,  book_description)
-	VALUES ($1, $2, $3, $4, $5, $6, &7) 
+	VALUES ($1, $2, $3, $4, $5, $6, $7) 
 	RETURNING id, book_title, book_author, publish_year, pages_count, book_read, added_at, read_at, book_description;
 	`
 
@@ -40,13 +39,14 @@ func (r *BookRepository) InsertBook(ctx context.Context, Book BookModel) (BookMo
 	)
 
 	if err != nil {
+		r.logger.Error(fmt.Sprint("insert row some", err.Error()))
 		return BookModel{}, err
 	}
 
 	return result, nil
 }
 
-func (r *BookRepository) UpdateBook(ctx context.Context, id int) (BookModel, error) {
+func (r *DbRepository) UpdateBook(ctx context.Context, id int) (BookModel, error) {
 	sqlQuery := `
 	UPDATE books 
 	SET book_read=$1, read_at=$2
@@ -68,13 +68,14 @@ func (r *BookRepository) UpdateBook(ctx context.Context, id int) (BookModel, err
 	)
 
 	if err != nil {
+		r.logger.Error(fmt.Sprint("update book query err", err.Error()))
 		return BookModel{}, err
 	}
 
 	return result, nil
 }
 
-func (r *BookRepository) DeleteBook(ctx context.Context, id int) (BookModel, error) {
+func (r *DbRepository) DeleteBook(ctx context.Context, id int) (BookModel, error) {
 	sqlQuery := `
 		DELETE FROM books WHERE id=$1
 		RETURNING id, book_title, book_author, publish_year, pages_count, book_read, added_at, read_at, book_description;
@@ -94,15 +95,16 @@ func (r *BookRepository) DeleteBook(ctx context.Context, id int) (BookModel, err
 	)
 
 	if err != nil {
+		r.logger.Error(fmt.Sprint("delete book query err", err.Error()))
 		return BookModel{}, err
 	}
 
 	return result, nil
 }
 
-func (r *BookRepository) GetBook(ctx context.Context, id int) (BookModel, error) {
+func (r *DbRepository) GetBook(ctx context.Context, id int) (BookModel, error) {
 	sqlQuery := `
-		SELECT * FROM books
+		SELECT id, book_title, book_author, publish_year, pages_count, book_read,added_at, read_at, book_description FROM books
 		WHERE id=$1;
 	`
 
@@ -121,15 +123,16 @@ func (r *BookRepository) GetBook(ctx context.Context, id int) (BookModel, error)
 	)
 
 	if err != nil {
+		r.logger.Error(err.Error())
 		return BookModel{}, err
 	}
 
 	return result, nil
 }
 
-func (r *BookRepository) GetBooks(ctx context.Context, author string, read *bool) ([]BookModel, error) {
+func (r *DbRepository) GetBooks(ctx context.Context, author string, read *bool) ([]BookModel, error) {
 	sqlQuery := `
-	SELECT * FROM books 
+	SELECT id, book_title, book_author, publish_year, pages_count, book_read,added_at, read_at, book_description FROM books	
 	`
 
 	var conditions []string //для динамического изменения SQL-запроса
@@ -142,7 +145,7 @@ func (r *BookRepository) GetBooks(ctx context.Context, author string, read *bool
 
 	if read != nil {
 		conditions = append(conditions, fmt.Sprintf("book_read=$%d", len(args)+1))
-		args = append(args, read)
+		args = append(args, *read)
 	}
 
 	if len(conditions) > 0 {
@@ -152,6 +155,7 @@ func (r *BookRepository) GetBooks(ctx context.Context, author string, read *bool
 
 	rows, err := r.pool.Query(ctx, sqlQuery, args...)
 	if err != nil {
+		r.logger.Error(fmt.Sprint("get books query err", err.Error()))
 		return []BookModel{}, err
 	}
 
@@ -182,15 +186,15 @@ func (r *BookRepository) GetBooks(ctx context.Context, author string, read *bool
 	}
 
 	if err := rows.Err(); err != nil {
-		log.Println(rows.Err())
+		r.logger.Error(fmt.Sprint("Get books row err", err.Error()))
 		return []BookModel{}, rows.Err()
 	}
 
-	pp.Print(books) //for logs
+	r.logger.Info(pp.Sprint("books fetched", books)) //for logs
 	return books, nil
 }
 
-// func (r *BookRepository) GetBooks(ctx context.Context) ([]BookModel, error) {
+// func (r *DbRepository) GetBooks(ctx context.Context) ([]BookModel, error) {
 // 	sqlQuery := `
 // 	SELECT id, book_title, book_author, publish_year, pages_count, book_read, added_at, read_at
 // 	FROM BOOKS

@@ -3,7 +3,7 @@ package http
 import (
 	"context"
 	"errors"
-	"log"
+	"fmt"
 	"net/http"
 	"os/signal"
 	"sync/atomic"
@@ -11,24 +11,27 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
+	"go.uber.org/zap"
 )
 
 type AppServer struct {
 	httpHandlers *HTTPHandlers
 	shuttingDown atomic.Bool
+	ServerLogger *zap.Logger
 }
 
-func NewServer(handlers *HTTPHandlers) *AppServer {
+func NewServer(handlers *HTTPHandlers, logg *zap.Logger) *AppServer {
 	return &AppServer{
 		httpHandlers: handlers,
+		ServerLogger: logg,
 	}
 }
 
 func (a *AppServer) StartServer() error {
 	router := mux.NewRouter()
-	router.Use(RecoverMiddleware)
+	router.Use(a.RecoverMiddleware)
 	router.Use(a.ShutdownMiddleWare)
-	router.Use(Middleware)
+	router.Use(a.Middleware)
 
 	router.Path("/books").Methods("POST").HandlerFunc(a.httpHandlers.HandlerAddNewBook)
 	router.Path("/books").Methods("GET").HandlerFunc(a.httpHandlers.HandlerGetBooks)
@@ -55,7 +58,7 @@ func serverLifeCycle(a *AppServer, server *http.Server) error {
 	errCh := make(chan error, 1)
 
 	go func() {
-		log.Println("Server started at:", server.Addr)
+		a.ServerLogger.Info(fmt.Sprintf("Server started at: %s", server.Addr))
 
 		if err := server.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
 			errCh <- err
@@ -64,6 +67,7 @@ func serverLifeCycle(a *AppServer, server *http.Server) error {
 
 	select {
 	case <-sigCtx.Done():
+		a.ServerLogger.Info("Shutting down the server...")
 		a.shuttingDown.Store(true)
 		ctxGS, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 		defer cancel()

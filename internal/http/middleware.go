@@ -2,18 +2,18 @@ package http
 
 import (
 	"fmt"
-	"log"
 	"net"
 	"net/http"
-	"runtime/debug"
 	"time"
+
+	"go.uber.org/zap"
 )
 
 // структура для имитации writera
 type ResponseWriter struct {
 	responseWrite  http.ResponseWriter
 	statusCode     int
-	statusRecieved bool //флажок на то отправили ли мы HTTP-статус
+	statusReceived bool //флажок на то отправили ли мы HTTP-статус
 }
 
 // constructor
@@ -27,8 +27,8 @@ func NewResponsewriter(w http.ResponseWriter) *ResponseWriter {
 // ниже копируем методы чтобы удовлетворять контракту интерфейса
 func (rp *ResponseWriter) WriteHeader(statusCode int) {
 	//если статус уже получен мы не имеем права ег оменять
-	if rp.statusRecieved == false {
-		rp.statusRecieved = true
+	if rp.statusReceived == false {
+		rp.statusReceived = true
 		rp.statusCode = statusCode
 		rp.responseWrite.WriteHeader(statusCode)
 	}
@@ -48,7 +48,7 @@ func (rp *ResponseWriter) Header() http.Header {
 	return rp.responseWrite.Header()
 }
 
-func Middleware(next http.Handler) http.Handler {
+func (app *AppServer) Middleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		newWriter := NewResponsewriter(w) //cоздаём новый writer через котоырй будем протаскивать наш статус код
 		measureTime := time.Now()         //время для лога
@@ -65,11 +65,11 @@ func Middleware(next http.Handler) http.Handler {
 
 		requestTime := fmt.Sprintf("%v ms", time.Since(measureTime).Milliseconds())
 
-		log.Printf("%s %s %v %s IP: %s User-agent: %s ", r.Method, r.URL.Path, newWriter.statusCode, requestTime, ip, user_agent)
+		app.ServerLogger.Info(fmt.Sprintf("%s %s %v %s IP: %s User-agent: %s ", r.Method, r.URL.Path, newWriter.statusCode, requestTime, ip, user_agent))
 	})
 }
 
-func RecoverMiddleware(next http.Handler) http.Handler {
+func (app *AppServer) RecoverMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		defer func() {
 			if err := recover(); err != nil {
@@ -79,8 +79,10 @@ func RecoverMiddleware(next http.Handler) http.Handler {
 					"Internal Server Error",
 					500,
 				)
-				log.Println(err)
-				debug.PrintStack()
+				app.ServerLogger.Error(
+					"panic revocered",
+					zap.Any("panic:", err),
+				)
 			}
 		}()
 
@@ -95,6 +97,7 @@ func (app *AppServer) ShutdownMiddleWare(next http.Handler) http.Handler {
 				"The server is undergoing a graceful shutdown. Active requests are being processed, but no new requests are accepted. Please try again later.",
 				http.StatusServiceUnavailable,
 			)
+			app.ServerLogger.Warn("user try to make request while graceful shutdown")
 
 			return
 		}

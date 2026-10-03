@@ -7,28 +7,39 @@ import (
 	"time"
 
 	"github.com/jackc/pgx/v5/pgxpool"
+	"go.uber.org/zap"
 )
 
-type BookRepository struct {
-	pool *pgxpool.Pool
+type BookRepository interface {
+	InsertBook(ctx context.Context, Book BookModel) (BookModel, error)
+	UpdateBook(ctx context.Context, id int) (BookModel, error)
+	DeleteBook(ctx context.Context, id int) (BookModel, error)
+	GetBook(ctx context.Context, id int)  (BookModel, error)
+	GetBooks(ctx context.Context, author string, read *bool) ([]BookModel, error)
 }
 
-func NewBookRepo(pool_connection *pgxpool.Pool) *BookRepository {
-	return &BookRepository{
-		pool: pool_connection,
+type DbRepository struct {
+	pool   *pgxpool.Pool
+	logger *zap.Logger
+}
+
+func NewBookRepo(pool_connection *pgxpool.Pool, Logg *zap.Logger) *DbRepository {
+	return &DbRepository{
+		pool:   pool_connection,
+		logger: Logg,
 	}
 }
 
 type BookModel struct {
-	ID         int
-	Title      string
-	Author     string
+	ID          int
+	Title       string
+	Author      string
 	Description *string
-	Year       int
-	PagesCount int
-	IsRead     bool
-	AddedAt    time.Time
-	ReadAt     *time.Time
+	Year        int
+	PagesCount  int
+	IsRead      bool
+	AddedAt     time.Time
+	ReadAt      *time.Time
 }
 
 func ConnectDB(ctx context.Context) (*pgxpool.Pool, error) {
@@ -44,7 +55,7 @@ func CheckConnection(ctx context.Context, pool *pgxpool.Pool) {
 	} //for /readyz
 }
 
-/* func (r *BookRepository) CreateDB(ctx context.Context) error {
+/* func (r *DbRepository) CreateDB(ctx context.Context) error {
 	sqlQuery := `
 	CREATE TABLE IF NOT EXISTS books (
 		id SERIAL PRIMARY KEY,
@@ -63,6 +74,6 @@ func CheckConnection(ctx context.Context, pool *pgxpool.Pool) {
 	}
 
 	return nil
-} 
-migrations used 
+}
+migrations used
 */

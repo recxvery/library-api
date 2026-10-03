@@ -24,6 +24,9 @@ services:
     ports:
       - "8081:8081"
 
+    volumes:
+      - ./logs:/app/logs
+
     environment:
       CONN_STRING : ${CONN_STRING}
 

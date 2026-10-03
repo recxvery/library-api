@@ -2,16 +2,17 @@ package http
 
 import (
 	"encoding/json"
-	"rest-api-app/db"
+	"rest-api-app/internal/core"
+	"rest-api-app/internal/db"
 	"time"
 )
 
 type BookDTO struct {
-	Author string `json:"author"`
-	Title  string `json:"title"`
+	Author      string `json:"author"`
+	Title       string `json:"title"`
 	Description string `json:"description"`
-	Pages  int    `json:"pages"`
-	Year   int    `json:"year"`
+	Pages       int    `json:"pages"`
+	Year        int    `json:"year"`
 }
 
 type errDTO struct {
@@ -31,14 +32,14 @@ func errToJSON(err error) []byte {
 func ValidateToCreate(book BookDTO) (db.BookModel, error) {
 	if book.Title != "" && book.Author != "" && book.Pages > 0 && book.Year > 0 {
 		return db.BookModel{
-			Title:      book.Title,
-			Author:     book.Author,
+			Title:       book.Title,
+			Author:      book.Author,
 			Description: &book.Description,
-			PagesCount: book.Pages,
-			Year:       book.Year,
-			AddedAt:    time.Now(),
+			PagesCount:  book.Pages,
+			Year:        book.Year,
+			AddedAt:     time.Now(),
 		}, nil
 	}
 
-	return db.BookModel{}, ErrorNotEnoughData
+	return db.BookModel{}, core.ErrorNotEnoughData
 }

@@ -1,0 +1,577 @@
+2026-10-03T15-00-03.802633	INFO	http/server.go:61	Server started at: :8081
+2026-10-03T15-00-30.380861	ERROR	db/service.go:158	get books query errERROR: syntax error at or near "ORDER" (SQLSTATE 42601)
+rest-api-app/db.(*BookRepository).GetBooks
+	/app/db/service.go:158
+rest-api-app/http.(*HTTPHandlers).HandlerGetBooks
+	/app/http/http.go:109
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2286
+rest-api-app/http.(*AppServer).Middleware-fm.(*AppServer).Middleware.func1
+	/app/http/middleware.go:64
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2286
+rest-api-app/http.(*AppServer).ShutdownMiddleWare-fm.(*AppServer).ShutdownMiddleWare.func1
+	/app/http/middleware.go:104
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2286
+rest-api-app/http.(*AppServer).RecoverMiddleware-fm.(*AppServer).RecoverMiddleware.func1
+	/app/http/middleware.go:89
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2286
+github.com/gorilla/mux.(*Router).ServeHTTP
+	/go/pkg/mod/github.com/gorilla/mux@v1.8.1/mux.go:212
+net/http.serverHandler.ServeHTTP
+	/usr/local/go/src/net/http/server.go:3311
+net/http.(*conn).serve
+	/usr/local/go/src/net/http/server.go:2067
+2026-10-03T15-00-30.380949	ERROR	http/http.go:191	ERROR: syntax error at or near "ORDER" (SQLSTATE 42601)
+rest-api-app/http.errorHandle
+	/app/http/http.go:191
+rest-api-app/http.(*HTTPHandlers).HandlerGetBooks
+	/app/http/http.go:111
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2286
+rest-api-app/http.(*AppServer).Middleware-fm.(*AppServer).Middleware.func1
+	/app/http/middleware.go:64
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2286
+rest-api-app/http.(*AppServer).ShutdownMiddleWare-fm.(*AppServer).ShutdownMiddleWare.func1
+	/app/http/middleware.go:104
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2286
+rest-api-app/http.(*AppServer).RecoverMiddleware-fm.(*AppServer).RecoverMiddleware.func1
+	/app/http/middleware.go:89
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2286
+github.com/gorilla/mux.(*Router).ServeHTTP
+	/go/pkg/mod/github.com/gorilla/mux@v1.8.1/mux.go:212
+net/http.serverHandler.ServeHTTP
+	/usr/local/go/src/net/http/server.go:3311
+net/http.(*conn).serve
+	/usr/local/go/src/net/http/server.go:2067
+2026-10-03T15-00-30.381074	INFO	http/middleware.go:68	GET /books 500 9 ms IP: 172.18.0.1 User-agent: curl/8.5.0 
+2026-10-03T15-00-54.575623	ERROR	db/service.go:158	get books query errERROR: syntax error at or near "ORDER" (SQLSTATE 42601)
+rest-api-app/db.(*BookRepository).GetBooks
+	/app/db/service.go:158
+rest-api-app/http.(*HTTPHandlers).HandlerGetBooks
+	/app/http/http.go:109
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2286
+rest-api-app/http.(*AppServer).Middleware-fm.(*AppServer).Middleware.func1
+	/app/http/middleware.go:64
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2286
+rest-api-app/http.(*AppServer).ShutdownMiddleWare-fm.(*AppServer).ShutdownMiddleWare.func1
+	/app/http/middleware.go:104
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2286
+rest-api-app/http.(*AppServer).RecoverMiddleware-fm.(*AppServer).RecoverMiddleware.func1
+	/app/http/middleware.go:89
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2286
+github.com/gorilla/mux.(*Router).ServeHTTP
+	/go/pkg/mod/github.com/gorilla/mux@v1.8.1/mux.go:212
+net/http.serverHandler.ServeHTTP
+	/usr/local/go/src/net/http/server.go:3311
+net/http.(*conn).serve
+	/usr/local/go/src/net/http/server.go:2067
+2026-10-03T15-00-54.575709	ERROR	http/http.go:191	ERROR: syntax error at or near "ORDER" (SQLSTATE 42601)
+rest-api-app/http.errorHandle
+	/app/http/http.go:191
+rest-api-app/http.(*HTTPHandlers).HandlerGetBooks
+	/app/http/http.go:111
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2286
+rest-api-app/http.(*AppServer).Middleware-fm.(*AppServer).Middleware.func1
+	/app/http/middleware.go:64
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2286
+rest-api-app/http.(*AppServer).ShutdownMiddleWare-fm.(*AppServer).ShutdownMiddleWare.func1
+	/app/http/middleware.go:104
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2286
+rest-api-app/http.(*AppServer).RecoverMiddleware-fm.(*AppServer).RecoverMiddleware.func1
+	/app/http/middleware.go:89
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2286
+github.com/gorilla/mux.(*Router).ServeHTTP
+	/go/pkg/mod/github.com/gorilla/mux@v1.8.1/mux.go:212
+net/http.serverHandler.ServeHTTP
+	/usr/local/go/src/net/http/server.go:3311
+net/http.(*conn).serve
+	/usr/local/go/src/net/http/server.go:2067
+2026-10-03T15-00-54.575782	INFO	http/middleware.go:68	GET /books 500 0 ms IP: 172.18.0.1 User-agent: curl/8.5.0 
+2026-10-03T15-03-03.101563	INFO	http/middleware.go:68	GET /books/1 200 3 ms IP: 172.18.0.1 User-agent: curl/8.5.0 
+2026-10-03T15-05-26.588064	INFO	http/server.go:61	Server started at: :8081
+2026-10-03T15-05-38.820052	INFO	http/middleware.go:68	GET /books/1 200 8 ms IP: 172.18.0.1 User-agent: curl/8.5.0 
+2026-10-03T15-05-40.430612	INFO	db/service.go:193	[31m[1m"[0m[31mbooks fetched[0m[31m[1m"[0m[]db.[32mBookModel[0m{
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m1[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31mThe Hobbit[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mJ.R.R. Tolkien[0m[31m[1m"[0m,
+    [33mDescription[0m: ([32m*string[0m)([36m[1mnil[0m),
+    [33mYear[0m:        [34m[1m1937[0m,
+    [33mPagesCount[0m:  [34m[1m310[0m,
+    [33mIsRead[0m:      [36m[1mtrue[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m01[0m [34m[1m08[0m:[34m[1m47[0m:[34m[1m36[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      &[34m[1m2026[0m-[34m[1m10[0m-[34m[1m01[0m [34m[1m19[0m:[34m[1m09[0m:[34m[1m29[0m [34m[1mUTC[0m,
+  },
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m2[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31m1984[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mGeorge Orwell[0m[31m[1m"[0m,
+    [33mDescription[0m: ([32m*string[0m)([36m[1mnil[0m),
+    [33mYear[0m:        [34m[1m1949[0m,
+    [33mPagesCount[0m:  [34m[1m328[0m,
+    [33mIsRead[0m:      [36m[1mtrue[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m01[0m [34m[1m08[0m:[34m[1m47[0m:[34m[1m50[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      &[34m[1m2026[0m-[34m[1m10[0m-[34m[1m03[0m [34m[1m00[0m:[34m[1m22[0m:[34m[1m08[0m [34m[1mUTC[0m,
+  },
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m3[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31mDune[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mFrank Herbert[0m[31m[1m"[0m,
+    [33mDescription[0m: ([32m*string[0m)([36m[1mnil[0m),
+    [33mYear[0m:        [34m[1m1965[0m,
+    [33mPagesCount[0m:  [34m[1m412[0m,
+    [33mIsRead[0m:      [36m[1mfalse[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m01[0m [34m[1m08[0m:[34m[1m47[0m:[34m[1m55[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      (*time.[32mTime[0m)([36m[1mnil[0m),
+  },
+}
+2026-10-03T15-05-40.430719	INFO	http/middleware.go:68	GET /books 200 1 ms IP: 172.18.0.1 User-agent: curl/8.5.0 
+2026-10-03T15-10-47.585764	INFO	http/server.go:61	Server started at: :8081
+2026-10-03T15-30-29.693887	INFO	http/server.go:70	Shutting down the server...
+2026-10-03T15-34-38.112249	INFO	http/server.go:61	Server started at: :8081
+2026-10-03T15-34-42.744070	INFO	http/middleware.go:68	GET /books/1 200 9 ms IP: 172.18.0.1 User-agent: curl/8.5.0 
+2026-10-03T15-34-46.062328	INFO	http/middleware.go:68	GET /books/1 200 0 ms IP: 172.18.0.1 User-agent: curl/8.5.0 
+2026-10-03T15-34-58.914184	INFO	db/service.go:193	[31m[1m"[0m[31mbooks fetched[0m[31m[1m"[0m[]db.[32mBookModel[0m{
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m1[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31mThe Hobbit[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mJ.R.R. Tolkien[0m[31m[1m"[0m,
+    [33mDescription[0m: ([32m*string[0m)([36m[1mnil[0m),
+    [33mYear[0m:        [34m[1m1937[0m,
+    [33mPagesCount[0m:  [34m[1m310[0m,
+    [33mIsRead[0m:      [36m[1mtrue[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m01[0m [34m[1m08[0m:[34m[1m47[0m:[34m[1m36[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      &[34m[1m2026[0m-[34m[1m10[0m-[34m[1m01[0m [34m[1m19[0m:[34m[1m09[0m:[34m[1m29[0m [34m[1mUTC[0m,
+  },
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m2[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31m1984[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mGeorge Orwell[0m[31m[1m"[0m,
+    [33mDescription[0m: ([32m*string[0m)([36m[1mnil[0m),
+    [33mYear[0m:        [34m[1m1949[0m,
+    [33mPagesCount[0m:  [34m[1m328[0m,
+    [33mIsRead[0m:      [36m[1mtrue[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m01[0m [34m[1m08[0m:[34m[1m47[0m:[34m[1m50[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      &[34m[1m2026[0m-[34m[1m10[0m-[34m[1m03[0m [34m[1m00[0m:[34m[1m22[0m:[34m[1m08[0m [34m[1mUTC[0m,
+  },
+}
+2026-10-03T15-34-58.914309	INFO	http/middleware.go:68	GET /books 200 1 ms IP: 172.18.0.1 User-agent: curl/8.5.0 
+2026-10-03T15-36-22.323691	INFO	http/middleware.go:68	POST /books 201 3 ms IP: 172.18.0.1 User-agent: curl/8.5.0 
+2026-10-03T15-36-29.155670	INFO	http/middleware.go:68	POST /books 201 0 ms IP: 172.18.0.1 User-agent: curl/8.5.0 
+2026-10-03T15-36-32.642608	INFO	http/middleware.go:68	POST /books 201 1 ms IP: 172.18.0.1 User-agent: curl/8.5.0 
+2026-10-03T15-36-36.993212	INFO	http/middleware.go:68	POST /books 201 0 ms IP: 172.18.0.1 User-agent: curl/8.5.0 
+2026-10-03T15-36-41.759848	INFO	http/middleware.go:68	POST /books 201 0 ms IP: 172.18.0.1 User-agent: curl/8.5.0 
+2026-10-03T15-36-44.871756	INFO	http/middleware.go:68	POST /books 201 1 ms IP: 172.18.0.1 User-agent: curl/8.5.0 
+2026-10-03T15-36-48.000412	INFO	http/middleware.go:68	POST /books 201 0 ms IP: 172.18.0.1 User-agent: curl/8.5.0 
+2026-10-03T15-36-51.934630	INFO	http/middleware.go:68	POST /books 201 0 ms IP: 172.18.0.1 User-agent: curl/8.5.0 
+2026-10-03T15-36-55.177825	INFO	http/middleware.go:68	POST /books 201 1 ms IP: 172.18.0.1 User-agent: curl/8.5.0 
+2026-10-03T15-36-59.486031	INFO	http/middleware.go:68	POST /books 201 0 ms IP: 172.18.0.1 User-agent: curl/8.5.0 
+2026-10-03T15-37-11.556689	INFO	db/service.go:193	[31m[1m"[0m[31mbooks fetched[0m[31m[1m"[0m[]db.[32mBookModel[0m{
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m1[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31mThe Hobbit[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mJ.R.R. Tolkien[0m[31m[1m"[0m,
+    [33mDescription[0m: ([32m*string[0m)([36m[1mnil[0m),
+    [33mYear[0m:        [34m[1m1937[0m,
+    [33mPagesCount[0m:  [34m[1m310[0m,
+    [33mIsRead[0m:      [36m[1mtrue[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m01[0m [34m[1m08[0m:[34m[1m47[0m:[34m[1m36[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      &[34m[1m2026[0m-[34m[1m10[0m-[34m[1m01[0m [34m[1m19[0m:[34m[1m09[0m:[34m[1m29[0m [34m[1mUTC[0m,
+  },
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m2[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31m1984[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mGeorge Orwell[0m[31m[1m"[0m,
+    [33mDescription[0m: ([32m*string[0m)([36m[1mnil[0m),
+    [33mYear[0m:        [34m[1m1949[0m,
+    [33mPagesCount[0m:  [34m[1m328[0m,
+    [33mIsRead[0m:      [36m[1mtrue[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m01[0m [34m[1m08[0m:[34m[1m47[0m:[34m[1m50[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      &[34m[1m2026[0m-[34m[1m10[0m-[34m[1m03[0m [34m[1m00[0m:[34m[1m22[0m:[34m[1m08[0m [34m[1mUTC[0m,
+  },
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m3[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31mDune[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mFrank Herbert[0m[31m[1m"[0m,
+    [33mDescription[0m: ([32m*string[0m)([36m[1mnil[0m),
+    [33mYear[0m:        [34m[1m1965[0m,
+    [33mPagesCount[0m:  [34m[1m412[0m,
+    [33mIsRead[0m:      [36m[1mfalse[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m01[0m [34m[1m08[0m:[34m[1m47[0m:[34m[1m55[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      (*time.[32mTime[0m)([36m[1mnil[0m),
+  },
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m4[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31mClean Code[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mRobert C. Martin[0m[31m[1m"[0m,
+    [33mDescription[0m: &[31m[1m"[0m[31mКнига о принципах написания чистого и поддерживаемого кода.[0m[31m[1m"[0m,
+    [33mYear[0m:        [34m[1m2008[0m,
+    [33mPagesCount[0m:  [34m[1m464[0m,
+    [33mIsRead[0m:      [36m[1mfalse[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m03[0m [34m[1m15[0m:[34m[1m36[0m:[34m[1m22[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      (*time.[32mTime[0m)([36m[1mnil[0m),
+  },
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m5[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31mThe Pragmatic Programmer[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mAndrew Hunt[0m[31m[1m"[0m,
+    [33mDescription[0m: &[31m[1m"[0m[31mПрактические подходы к разработке программного обеспечения.[0m[31m[1m"[0m,
+    [33mYear[0m:        [34m[1m1999[0m,
+    [33mPagesCount[0m:  [34m[1m352[0m,
+    [33mIsRead[0m:      [36m[1mfalse[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m03[0m [34m[1m15[0m:[34m[1m36[0m:[34m[1m29[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      (*time.[32mTime[0m)([36m[1mnil[0m),
+  },
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m6[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31mDesigning Data-Intensive Applications[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mMartin Kleppmann[0m[31m[1m"[0m,
+    [33mDescription[0m: &[31m[1m"[0m[31mАрхитектура распределённых систем, базы данных и обработка данных.[0m[31m[1m"[0m,
+    [33mYear[0m:        [34m[1m2017[0m,
+    [33mPagesCount[0m:  [34m[1m616[0m,
+    [33mIsRead[0m:      [36m[1mfalse[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m03[0m [34m[1m15[0m:[34m[1m36[0m:[34m[1m32[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      (*time.[32mTime[0m)([36m[1mnil[0m),
+  },
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m7[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31mThe Go Programming Language[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mAlan A. A. Donovan[0m[31m[1m"[0m,
+    [33mDescription[0m: &[31m[1m"[0m[31mПодробное введение в язык программирования Go.[0m[31m[1m"[0m,
+    [33mYear[0m:        [34m[1m2015[0m,
+    [33mPagesCount[0m:  [34m[1m380[0m,
+    [33mIsRead[0m:      [36m[1mfalse[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m03[0m [34m[1m15[0m:[34m[1m36[0m:[34m[1m36[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      (*time.[32mTime[0m)([36m[1mnil[0m),
+  },
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m8[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31mEffective Go[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mGoogle[0m[31m[1m"[0m,
+    [33mDescription[0m: &[31m[1m"[0m[31mРекомендации по написанию идиоматичного кода на Go.[0m[31m[1m"[0m,
+    [33mYear[0m:        [34m[1m2010[0m,
+    [33mPagesCount[0m:  [34m[1m150[0m,
+    [33mIsRead[0m:      [36m[1mfalse[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m03[0m [34m[1m15[0m:[34m[1m36[0m:[34m[1m41[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      (*time.[32mTime[0m)([36m[1mnil[0m),
+  },
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m9[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31m1984[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mGeorge Orwell[0m[31m[1m"[0m,
+    [33mDescription[0m: &[31m[1m"[0m[31mАнтиутопический роман о тоталитарном обществе.[0m[31m[1m"[0m,
+    [33mYear[0m:        [34m[1m1949[0m,
+    [33mPagesCount[0m:  [34m[1m328[0m,
+    [33mIsRead[0m:      [36m[1mfalse[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m03[0m [34m[1m15[0m:[34m[1m36[0m:[34m[1m44[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      (*time.[32mTime[0m)([36m[1mnil[0m),
+  },
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m10[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31mThe Martian[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mAndy Weir[0m[31m[1m"[0m,
+    [33mDescription[0m: &[31m[1m"[0m[31mНаучно-фантастическая история выживания на Марсе.[0m[31m[1m"[0m,
+    [33mYear[0m:        [34m[1m2011[0m,
+    [33mPagesCount[0m:  [34m[1m369[0m,
+    [33mIsRead[0m:      [36m[1mfalse[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m03[0m [34m[1m15[0m:[34m[1m36[0m:[34m[1m47[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      (*time.[32mTime[0m)([36m[1mnil[0m),
+  },
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m11[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31mDune[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mFrank Herbert[0m[31m[1m"[0m,
+    [33mDescription[0m: &[31m[1m"[0m[31mНаучно-фантастический роман о планете Арракис.[0m[31m[1m"[0m,
+    [33mYear[0m:        [34m[1m1965[0m,
+    [33mPagesCount[0m:  [34m[1m688[0m,
+    [33mIsRead[0m:      [36m[1mfalse[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m03[0m [34m[1m15[0m:[34m[1m36[0m:[34m[1m51[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      (*time.[32mTime[0m)([36m[1mnil[0m),
+  },
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m12[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31mThe Lord of the Rings[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mJ. R. R. Tolkien[0m[31m[1m"[0m,
+    [33mDescription[0m: &[31m[1m"[0m[31mЭпическое фэнтези о путешествии Фродо и уничтожении Кольца.[0m[31m[1m"[0m,
+    [33mYear[0m:        [34m[1m1954[0m,
+    [33mPagesCount[0m:  [34m[1m1178[0m,
+    [33mIsRead[0m:      [36m[1mfalse[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m03[0m [34m[1m15[0m:[34m[1m36[0m:[34m[1m55[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      (*time.[32mTime[0m)([36m[1mnil[0m),
+  },
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m13[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31mHarry Potter and the Philosophers Stone[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mJ. K. Rowling[0m[31m[1m"[0m,
+    [33mDescription[0m: &[31m[1m"[0m[31mПервая история о юном волшебнике Гарри Поттере.[0m[31m[1m"[0m,
+    [33mYear[0m:        [34m[1m1997[0m,
+    [33mPagesCount[0m:  [34m[1m223[0m,
+    [33mIsRead[0m:      [36m[1mfalse[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m03[0m [34m[1m15[0m:[34m[1m36[0m:[34m[1m59[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      (*time.[32mTime[0m)([36m[1mnil[0m),
+  },
+}
+2026-10-03T15-37-11.556856	INFO	http/middleware.go:68	GET /books 200 2 ms IP: 172.18.0.1 User-agent: curl/8.5.0 
+2026-10-03T15-37-18.040131	INFO	db/service.go:193	[31m[1m"[0m[31mbooks fetched[0m[31m[1m"[0m[]db.[32mBookModel[0m{
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m2[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31m1984[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mGeorge Orwell[0m[31m[1m"[0m,
+    [33mDescription[0m: ([32m*string[0m)([36m[1mnil[0m),
+    [33mYear[0m:        [34m[1m1949[0m,
+    [33mPagesCount[0m:  [34m[1m328[0m,
+    [33mIsRead[0m:      [36m[1mtrue[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m01[0m [34m[1m08[0m:[34m[1m47[0m:[34m[1m50[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      &[34m[1m2026[0m-[34m[1m10[0m-[34m[1m03[0m [34m[1m00[0m:[34m[1m22[0m:[34m[1m08[0m [34m[1mUTC[0m,
+  },
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m9[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31m1984[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mGeorge Orwell[0m[31m[1m"[0m,
+    [33mDescription[0m: &[31m[1m"[0m[31mАнтиутопический роман о тоталитарном обществе.[0m[31m[1m"[0m,
+    [33mYear[0m:        [34m[1m1949[0m,
+    [33mPagesCount[0m:  [34m[1m328[0m,
+    [33mIsRead[0m:      [36m[1mfalse[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m03[0m [34m[1m15[0m:[34m[1m36[0m:[34m[1m44[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      (*time.[32mTime[0m)([36m[1mnil[0m),
+  },
+}
+2026-10-03T15-37-18.040234	INFO	http/middleware.go:68	GET /books 200 3 ms IP: 172.18.0.1 User-agent: curl/8.5.0 
+2026-10-03T15-37-25.106485	INFO	db/service.go:193	[31m[1m"[0m[31mbooks fetched[0m[31m[1m"[0m[]db.[32mBookModel[0m{
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m1[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31mThe Hobbit[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mJ.R.R. Tolkien[0m[31m[1m"[0m,
+    [33mDescription[0m: ([32m*string[0m)([36m[1mnil[0m),
+    [33mYear[0m:        [34m[1m1937[0m,
+    [33mPagesCount[0m:  [34m[1m310[0m,
+    [33mIsRead[0m:      [36m[1mtrue[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m01[0m [34m[1m08[0m:[34m[1m47[0m:[34m[1m36[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      &[34m[1m2026[0m-[34m[1m10[0m-[34m[1m01[0m [34m[1m19[0m:[34m[1m09[0m:[34m[1m29[0m [34m[1mUTC[0m,
+  },
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m2[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31m1984[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mGeorge Orwell[0m[31m[1m"[0m,
+    [33mDescription[0m: ([32m*string[0m)([36m[1mnil[0m),
+    [33mYear[0m:        [34m[1m1949[0m,
+    [33mPagesCount[0m:  [34m[1m328[0m,
+    [33mIsRead[0m:      [36m[1mtrue[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m01[0m [34m[1m08[0m:[34m[1m47[0m:[34m[1m50[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      &[34m[1m2026[0m-[34m[1m10[0m-[34m[1m03[0m [34m[1m00[0m:[34m[1m22[0m:[34m[1m08[0m [34m[1mUTC[0m,
+  },
+}
+2026-10-03T15-37-25.106566	INFO	http/middleware.go:68	GET /books 200 1 ms IP: 172.18.0.1 User-agent: curl/8.5.0 
+2026-10-03T15-37-27.199973	INFO	http/server.go:70	Shutting down the server...
+2026-10-03T17-21-14.748882	INFO	http/server.go:61	Server started at: :8081
+2026-10-03T17-21-14.903609	INFO	db/repository.go:193	[31m[1m"[0m[31mbooks fetched[0m[31m[1m"[0m[]db.[32mBookModel[0m{
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m1[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31mThe Hobbit[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mJ.R.R. Tolkien[0m[31m[1m"[0m,
+    [33mDescription[0m: ([32m*string[0m)([36m[1mnil[0m),
+    [33mYear[0m:        [34m[1m1937[0m,
+    [33mPagesCount[0m:  [34m[1m310[0m,
+    [33mIsRead[0m:      [36m[1mtrue[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m01[0m [34m[1m08[0m:[34m[1m47[0m:[34m[1m36[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      &[34m[1m2026[0m-[34m[1m10[0m-[34m[1m01[0m [34m[1m19[0m:[34m[1m09[0m:[34m[1m29[0m [34m[1mUTC[0m,
+  },
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m2[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31m1984[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mGeorge Orwell[0m[31m[1m"[0m,
+    [33mDescription[0m: ([32m*string[0m)([36m[1mnil[0m),
+    [33mYear[0m:        [34m[1m1949[0m,
+    [33mPagesCount[0m:  [34m[1m328[0m,
+    [33mIsRead[0m:      [36m[1mtrue[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m01[0m [34m[1m08[0m:[34m[1m47[0m:[34m[1m50[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      &[34m[1m2026[0m-[34m[1m10[0m-[34m[1m03[0m [34m[1m00[0m:[34m[1m22[0m:[34m[1m08[0m [34m[1mUTC[0m,
+  },
+}
+2026-10-03T17-21-14.903808	INFO	http/middleware.go:68	GET /books 200 12 ms IP: 172.18.0.1 User-agent: curl/8.5.0 
+2026-10-03T17-21-16.832085	INFO	db/repository.go:193	[31m[1m"[0m[31mbooks fetched[0m[31m[1m"[0m[]db.[32mBookModel[0m{
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m1[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31mThe Hobbit[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mJ.R.R. Tolkien[0m[31m[1m"[0m,
+    [33mDescription[0m: ([32m*string[0m)([36m[1mnil[0m),
+    [33mYear[0m:        [34m[1m1937[0m,
+    [33mPagesCount[0m:  [34m[1m310[0m,
+    [33mIsRead[0m:      [36m[1mtrue[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m01[0m [34m[1m08[0m:[34m[1m47[0m:[34m[1m36[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      &[34m[1m2026[0m-[34m[1m10[0m-[34m[1m01[0m [34m[1m19[0m:[34m[1m09[0m:[34m[1m29[0m [34m[1mUTC[0m,
+  },
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m2[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31m1984[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mGeorge Orwell[0m[31m[1m"[0m,
+    [33mDescription[0m: ([32m*string[0m)([36m[1mnil[0m),
+    [33mYear[0m:        [34m[1m1949[0m,
+    [33mPagesCount[0m:  [34m[1m328[0m,
+    [33mIsRead[0m:      [36m[1mtrue[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m01[0m [34m[1m08[0m:[34m[1m47[0m:[34m[1m50[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      &[34m[1m2026[0m-[34m[1m10[0m-[34m[1m03[0m [34m[1m00[0m:[34m[1m22[0m:[34m[1m08[0m [34m[1mUTC[0m,
+  },
+}
+2026-10-03T17-21-16.832166	INFO	http/middleware.go:68	GET /books 200 0 ms IP: 172.18.0.1 User-agent: curl/8.5.0 
+2026-10-03T17-21-22.682247	INFO	db/repository.go:193	[31m[1m"[0m[31mbooks fetched[0m[31m[1m"[0m[]db.[32mBookModel[0m{
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m1[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31mThe Hobbit[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mJ.R.R. Tolkien[0m[31m[1m"[0m,
+    [33mDescription[0m: ([32m*string[0m)([36m[1mnil[0m),
+    [33mYear[0m:        [34m[1m1937[0m,
+    [33mPagesCount[0m:  [34m[1m310[0m,
+    [33mIsRead[0m:      [36m[1mtrue[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m01[0m [34m[1m08[0m:[34m[1m47[0m:[34m[1m36[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      &[34m[1m2026[0m-[34m[1m10[0m-[34m[1m01[0m [34m[1m19[0m:[34m[1m09[0m:[34m[1m29[0m [34m[1mUTC[0m,
+  },
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m2[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31m1984[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mGeorge Orwell[0m[31m[1m"[0m,
+    [33mDescription[0m: ([32m*string[0m)([36m[1mnil[0m),
+    [33mYear[0m:        [34m[1m1949[0m,
+    [33mPagesCount[0m:  [34m[1m328[0m,
+    [33mIsRead[0m:      [36m[1mtrue[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m01[0m [34m[1m08[0m:[34m[1m47[0m:[34m[1m50[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      &[34m[1m2026[0m-[34m[1m10[0m-[34m[1m03[0m [34m[1m00[0m:[34m[1m22[0m:[34m[1m08[0m [34m[1mUTC[0m,
+  },
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m3[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31mDune[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mFrank Herbert[0m[31m[1m"[0m,
+    [33mDescription[0m: ([32m*string[0m)([36m[1mnil[0m),
+    [33mYear[0m:        [34m[1m1965[0m,
+    [33mPagesCount[0m:  [34m[1m412[0m,
+    [33mIsRead[0m:      [36m[1mfalse[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m01[0m [34m[1m08[0m:[34m[1m47[0m:[34m[1m55[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      (*time.[32mTime[0m)([36m[1mnil[0m),
+  },
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m4[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31mClean Code[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mRobert C. Martin[0m[31m[1m"[0m,
+    [33mDescription[0m: &[31m[1m"[0m[31mКнига о принципах написания чистого и поддерживаемого кода.[0m[31m[1m"[0m,
+    [33mYear[0m:        [34m[1m2008[0m,
+    [33mPagesCount[0m:  [34m[1m464[0m,
+    [33mIsRead[0m:      [36m[1mfalse[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m03[0m [34m[1m15[0m:[34m[1m36[0m:[34m[1m22[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      (*time.[32mTime[0m)([36m[1mnil[0m),
+  },
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m5[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31mThe Pragmatic Programmer[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mAndrew Hunt[0m[31m[1m"[0m,
+    [33mDescription[0m: &[31m[1m"[0m[31mПрактические подходы к разработке программного обеспечения.[0m[31m[1m"[0m,
+    [33mYear[0m:        [34m[1m1999[0m,
+    [33mPagesCount[0m:  [34m[1m352[0m,
+    [33mIsRead[0m:      [36m[1mfalse[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m03[0m [34m[1m15[0m:[34m[1m36[0m:[34m[1m29[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      (*time.[32mTime[0m)([36m[1mnil[0m),
+  },
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m6[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31mDesigning Data-Intensive Applications[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mMartin Kleppmann[0m[31m[1m"[0m,
+    [33mDescription[0m: &[31m[1m"[0m[31mАрхитектура распределённых систем, базы данных и обработка данных.[0m[31m[1m"[0m,
+    [33mYear[0m:        [34m[1m2017[0m,
+    [33mPagesCount[0m:  [34m[1m616[0m,
+    [33mIsRead[0m:      [36m[1mfalse[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m03[0m [34m[1m15[0m:[34m[1m36[0m:[34m[1m32[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      (*time.[32mTime[0m)([36m[1mnil[0m),
+  },
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m7[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31mThe Go Programming Language[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mAlan A. A. Donovan[0m[31m[1m"[0m,
+    [33mDescription[0m: &[31m[1m"[0m[31mПодробное введение в язык программирования Go.[0m[31m[1m"[0m,
+    [33mYear[0m:        [34m[1m2015[0m,
+    [33mPagesCount[0m:  [34m[1m380[0m,
+    [33mIsRead[0m:      [36m[1mfalse[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m03[0m [34m[1m15[0m:[34m[1m36[0m:[34m[1m36[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      (*time.[32mTime[0m)([36m[1mnil[0m),
+  },
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m8[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31mEffective Go[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mGoogle[0m[31m[1m"[0m,
+    [33mDescription[0m: &[31m[1m"[0m[31mРекомендации по написанию идиоматичного кода на Go.[0m[31m[1m"[0m,
+    [33mYear[0m:        [34m[1m2010[0m,
+    [33mPagesCount[0m:  [34m[1m150[0m,
+    [33mIsRead[0m:      [36m[1mfalse[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m03[0m [34m[1m15[0m:[34m[1m36[0m:[34m[1m41[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      (*time.[32mTime[0m)([36m[1mnil[0m),
+  },
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m9[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31m1984[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mGeorge Orwell[0m[31m[1m"[0m,
+    [33mDescription[0m: &[31m[1m"[0m[31mАнтиутопический роман о тоталитарном обществе.[0m[31m[1m"[0m,
+    [33mYear[0m:        [34m[1m1949[0m,
+    [33mPagesCount[0m:  [34m[1m328[0m,
+    [33mIsRead[0m:      [36m[1mfalse[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m03[0m [34m[1m15[0m:[34m[1m36[0m:[34m[1m44[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      (*time.[32mTime[0m)([36m[1mnil[0m),
+  },
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m10[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31mThe Martian[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mAndy Weir[0m[31m[1m"[0m,
+    [33mDescription[0m: &[31m[1m"[0m[31mНаучно-фантастическая история выживания на Марсе.[0m[31m[1m"[0m,
+    [33mYear[0m:        [34m[1m2011[0m,
+    [33mPagesCount[0m:  [34m[1m369[0m,
+    [33mIsRead[0m:      [36m[1mfalse[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m03[0m [34m[1m15[0m:[34m[1m36[0m:[34m[1m47[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      (*time.[32mTime[0m)([36m[1mnil[0m),
+  },
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m11[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31mDune[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mFrank Herbert[0m[31m[1m"[0m,
+    [33mDescription[0m: &[31m[1m"[0m[31mНаучно-фантастический роман о планете Арракис.[0m[31m[1m"[0m,
+    [33mYear[0m:        [34m[1m1965[0m,
+    [33mPagesCount[0m:  [34m[1m688[0m,
+    [33mIsRead[0m:      [36m[1mfalse[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m03[0m [34m[1m15[0m:[34m[1m36[0m:[34m[1m51[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      (*time.[32mTime[0m)([36m[1mnil[0m),
+  },
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m12[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31mThe Lord of the Rings[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mJ. R. R. Tolkien[0m[31m[1m"[0m,
+    [33mDescription[0m: &[31m[1m"[0m[31mЭпическое фэнтези о путешествии Фродо и уничтожении Кольца.[0m[31m[1m"[0m,
+    [33mYear[0m:        [34m[1m1954[0m,
+    [33mPagesCount[0m:  [34m[1m1178[0m,
+    [33mIsRead[0m:      [36m[1mfalse[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m03[0m [34m[1m15[0m:[34m[1m36[0m:[34m[1m55[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      (*time.[32mTime[0m)([36m[1mnil[0m),
+  },
+  db.[32mBookModel[0m{
+    [33mID[0m:          [34m[1m13[0m,
+    [33mTitle[0m:       [31m[1m"[0m[31mHarry Potter and the Philosophers Stone[0m[31m[1m"[0m,
+    [33mAuthor[0m:      [31m[1m"[0m[31mJ. K. Rowling[0m[31m[1m"[0m,
+    [33mDescription[0m: &[31m[1m"[0m[31mПервая история о юном волшебнике Гарри Поттере.[0m[31m[1m"[0m,
+    [33mYear[0m:        [34m[1m1997[0m,
+    [33mPagesCount[0m:  [34m[1m223[0m,
+    [33mIsRead[0m:      [36m[1mfalse[0m,
+    [33mAddedAt[0m:     [34m[1m2026[0m-[34m[1m10[0m-[34m[1m03[0m [34m[1m15[0m:[34m[1m36[0m:[34m[1m59[0m [34m[1mUTC[0m,
+    [33mReadAt[0m:      (*time.[32mTime[0m)([36m[1mnil[0m),
+  },
+}
+2026-10-03T17-21-22.682410	INFO	http/middleware.go:68	GET /books 200 2 ms IP: 172.18.0.1 User-agent: curl/8.5.0 
+2026-10-03T17-21-31.434407	INFO	http/server.go:70	Shutting down the server...

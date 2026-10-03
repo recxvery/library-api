@@ -2,10 +2,13 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"os"
-	"rest-api-app/db"
-	"rest-api-app/http"
+
+	"rest-api-app/internal/core"
+	"rest-api-app/internal/db"
+	"rest-api-app/internal/http"
 
 	"github.com/golang-migrate/migrate/v4"
 	_ "github.com/golang-migrate/migrate/v4/database/postgres"
@@ -21,7 +24,14 @@ func main() {
 	}
 	defer pool.Close()
 
-	repo := db.NewBookRepo(pool)
+	logger, closeLogger, err := core.NewLogger("INFO")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer closeLogger()
+
+	repo := db.NewBookRepo(pool, logger)
 
 	m, err := migrate.New(
 		"file://migrations",
@@ -36,13 +46,13 @@ func main() {
 		log.Fatal(err)
 	}
 
-	handlers := http.NewHTTPHandlers(repo)
-	server := http.NewServer(handlers)
+	handlers := http.NewHTTPHandlers(repo, logger)
+	server := http.NewServer(handlers, logger)
 
 	// log.Println("Server started")
 	if err := server.StartServer(); err != nil {
-		log.Println(err.Error())
+		server.ServerLogger.Error(fmt.Sprint("Server shut down with trouble", err.Error()))
 	} else {
-		log.Println("Gracefully shutodwn")
+		log.Println("Gracefully shutodwn completed successfully")
 	}
 }
