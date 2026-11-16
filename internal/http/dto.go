@@ -30,14 +30,14 @@ func errToJSON(err error) []byte {
 }
 
 func ValidateToCreate(book BookDTO) (db.BookModel, error) {
-	if book.Title != "" && book.Author != "" && book.Pages > 0 && book.Year > 0 {
+	if book.Title != "" && book.Author != "" && book.Pages > 30 && book.Year > 100 {
 		return db.BookModel{
 			Title:       book.Title,
 			Author:      book.Author,
 			Description: &book.Description,
 			PagesCount:  book.Pages,
 			Year:        book.Year,
-			AddedAt:     time.Now(),
+			// AddedAt:     time.Now(),
 		}, nil
 	}
 
